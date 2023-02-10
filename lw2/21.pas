@@ -1,48 +1,38 @@
 PROGRAM NumKomp(INPUT, OUTPUT);
 CONST
   N = 10;
-  K = 3;
+  K = 6;
 
 TYPE
-  MArr = ARRAY [1 .. N] OF INTEGER;
+  CArr = ARRAY [0 .. K] OF INTEGER;
 VAR
-  I: INTEGER;
-  M: MArr;
-  
-FUNCTION IsKomp(VAR A: MArr): BOOLEAN;
-VAR
-  I, Sum: INTEGER;
-BEGIN
-  Sum := 0;
-  FOR I := 1 TO K
-  DO
-    Sum := Sum + A[K - I];
-  IsKomp := Sum = N
-END; 
+  I, H, CN, CK: INTEGER;
+  A: CArr;
+
   
 BEGIN
-  FOR I := 1 TO K
+  CN := N + K - 1;
+  CK := K - 1;
+  A[0] := -1;
+  FOR I := 1 TO CK
   DO
-    M[I] := 1;
-  WHILE M[K] <> N - K + 1
+    A[I] := I;
+  H := 1;
+  WHILE H <> 0
   DO
     BEGIN
-      IF IsKomp(M)
-      THEN
-        BEGIN
-          FOR I := 1 TO K
-          DO
-            WRITE(M[K - I]);
-          WRITELN
-        END;
-      I := 0;
-      WHILE M[I] = N - 1
+      FOR I := 1 TO CK
       DO
-        BEGIN 
-          M[I] := 1;
-          I := I + 1
-        END;
-      M[I] := M[I] + 1
+        WRITE(A[I]);
+      WRITELN;
+      H := CK;
+      WHILE A[H] = CN - CK + H
+      DO
+        H := H - 1;
+      A[H] := A[H] + 1;
+      FOR I := H + 1 TO CK
+      DO
+        A[I] := A[I - 1] + 1
     END
 END.
     
