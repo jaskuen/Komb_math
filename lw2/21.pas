@@ -9,6 +9,30 @@ VAR
   I, H, CN, CK: INTEGER;
   A: CArr;
 
+PROCEDURE WriteKomp(VAR A: CArr);
+VAR
+  I, Num: INTEGER;
+  Plus: BOOLEAN;
+BEGIN 
+  Plus := TRUE;
+  FOR I := 1 TO K - 1
+  DO
+    BEGIN
+      IF I = 1
+      THEN
+        Num := A[I] - 1
+      ELSE
+        Num := A[I] - A[I - 1] - 1;
+      IF Num <> 0
+      THEN
+        WRITE(Num, ' ')
+    END;
+  Num := N + K - 1 - A[K - 1];
+  IF Num <> 0
+  THEN
+    WRITE(Num);
+  WRITELN  
+END;
   
 BEGIN
   CN := N + K - 1;
@@ -21,10 +45,7 @@ BEGIN
   WHILE H <> 0
   DO
     BEGIN
-      FOR I := 1 TO CK
-      DO
-        WRITE(A[I]);
-      WRITELN;
+      WriteKomp(A);
       H := CK;
       WHILE A[H] = CN - CK + H
       DO
